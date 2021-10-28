@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Список укладок</title>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+  <div class="starter-template">
+    <a th:href="@{/addTask}">Добавить укладку</a>
+    <table>
+      <tr>
+        <th>Дата</th>
+        <th>Адрес</th>
+        <th>№ продажи</th>
+      </tr>
+      <th:block th:each="task : ${tasks}">
+        <tr>
+          <td th:text="${task.getDate()}"></td>
+          <td th:text="${task.getAdress()}"></td>
+          <td><a th:href="@{tasks/{id}(id=${task.getId()})}"><span th:text="${task.getOrderNum()}"></span></a></td>
+        </tr>
+      </th:block>
+    </table>
+  </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

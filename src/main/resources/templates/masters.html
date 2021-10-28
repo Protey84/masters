@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Список мастеров</title>
+
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="starter-template">
+        <table>
+            <tr>
+                <th>Мастер</th>
+            </tr>
+            <th:block th:each="master : ${masters}">
+                <tr>
+                    <td th:text="${master}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"/>
+
+</body>
+</html>

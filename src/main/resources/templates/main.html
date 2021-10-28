@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<head>
+
+    <title>Главная</title>
+    <link rel="stylesheet" type="text/css" th:href="style.css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+
+    <div class="starter-template">
+        <form th:action="@{/main}" th:object="${filter}" method="post">
+        <div class="filter">
+            <div class="date">
+                <label>
+                    <input th:type="date" th:value="*{startDay}" th:field="*{startDay}">
+                </label> - <label>
+                <input th:type="date" th:value="*{finishDay}" th:field="*{finishDay}">
+            </label>
+            </div>
+            <div class="masterFilter">
+                <label>
+                    <select th:field="*{master}">
+                        <option value=""> Выберите мастера </option>
+                        <option th:each="master1 : ${masters}"
+                                th:value="${master1.id}"
+                                th:utext="${master1.name}"></option>
+                    </select>
+                </label>
+            </div>
+            <input type="submit" value="Применить">
+        </div>
+        </form>
+        <div class="mainContainer">
+            <div class="row">
+                <div class="col1">Дата</div>
+                <div class="col2">Работа<br/></div>
+            </div>
+            <div class="body">
+                <th:block th:each="task : ${schedule}">
+                    <div class="row">
+                        <div class="col1"><label th:text="${#temporals.dayOfWeekName(task.getKey())}"/><br><label th:text="${task.getKey()}"/> </div>
+                        <div class="col2">
+                            <a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку<br/></a>
+                            <div th:switch="${task.getValue()}">
+                                <h2 th:case="null">Свободно!</h2>
+                                <div th:case="*">
+                                <table>
+                                    <thead>
+                                    <tr>
+                                        <th>Номер продажи</th>
+                                        <th>Адрес</th>
+                                        <th>Телефон</th>
+                                        <th>Мастер</th>
+                                        <th>Количество</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <th:block th:each="curTask : ${task.getValue()}">
+                                        <tr>
+                                        <td th:text="${curTask.orderNum}"></td>
+                                        <td th:text="${curTask.adress}"></td>
+                                        <td th:text="${curTask.phone}"></td>
+                                        <td th:text="${curTask.master}"></td>
+                                        <td>
+                                            <th:block th:each="job : ${curTask.jobs}">
+                                                <span th:text="${job}"></span>
+                                            </th:block>
+                                        </td>
+                                        </tr>
+                                    </th:block>
+                                    </tbody>
+                                </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+.col2{
+    float: right; /* Ширина колонок */
+    padding: 0 6px; /* Поля по вертикали и горизонтали */
+    float: left; /* Обтекание слоев */
+}
+.col1{
+    width: 100px; /* Ширина колонок */
+    float: left;
+    padding: 0 6px; /* Поля по вертикали и горизонтали */
+    float: left; /* Обтекание слоев */
+    border-right: 1px solid #000; /* Параметры линии справа от текста */
+}
+.container:after, .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+.row {
+    margin-bottom: 15px;
+}
+.header{
+    width: 100%;
+    border-bottom: 1px solid #000000;
+}
+h1{
+    color:#0000FF;
+}
+
+h2{
+    color:#FF0000;
+}
+
+footer{
+    margin-top:60px;
+}
