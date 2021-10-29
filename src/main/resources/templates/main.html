@@ -40,7 +40,7 @@
             <div class="body">
                 <th:block th:each="task : ${schedule}">
                     <div class="row">
-                        <div class="col1"><label th:text="${#temporals.dayOfWeekName(task.getKey())}"/><br><label th:text="${task.getKey()}"/> </div>
+                        <div class="col1"><label th:text="${#temporals.dayOfWeekName(task.getKey())}"/><br><label th:text="${#temporals.format(task.getKey(), 'dd.MM.yyyy')}"/> </div>
                         <div class="col2">
                             <a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку<br/></a>
                             <div th:switch="${task.getValue()}">
@@ -49,20 +49,20 @@
                                 <table>
                                     <thead>
                                     <tr>
+                                        <th>Мастер</th>
                                         <th>Номер продажи</th>
                                         <th>Адрес</th>
                                         <th>Телефон</th>
-                                        <th>Мастер</th>
                                         <th>Количество</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <th:block th:each="curTask : ${task.getValue()}">
                                         <tr>
-                                        <td th:text="${curTask.orderNum}"></td>
-                                        <td th:text="${curTask.adress}"></td>
-                                        <td th:text="${curTask.phone}"></td>
-                                        <td th:text="${curTask.master}"></td>
+                                            <td th:text="${curTask.master}"></td>
+                                            <td th:text="${curTask.orderNum}"></td>
+                                            <td th:text="${curTask.adress}"></td>
+                                            <td th:text="${curTask.phone}"></td>
                                         <td>
                                             <th:block th:each="job : ${curTask.jobs}">
                                                 <span th:text="${job}"></span>

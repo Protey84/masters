@@ -1,7 +1,6 @@
 package com.example.protey.controller;
 
 import com.example.protey.entity.FilterTask;
-import com.example.protey.entity.Job;
 import com.example.protey.entity.Task;
 import com.example.protey.repo.MasterRepo;
 import com.example.protey.service.TaskService;
@@ -13,8 +12,8 @@ import java.time.LocalDate;
 
 @Controller
 public class TaskController {
-    private TaskService service;
-    private MasterRepo repo;
+    private final TaskService service;
+    private final MasterRepo repo;
 
     public TaskController(TaskService service, MasterRepo repo) {
         this.service = service;

@@ -4,6 +4,7 @@ import com.example.protey.entity.Job;
 import com.example.protey.entity.Master;
 import com.example.protey.entity.Task;
 import com.example.protey.repo.TaskRepo;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -43,7 +44,7 @@ public class TaskService {
         return;
     }
 
-    public TreeMap<LocalDate, List<Task>> getSchedule(LocalDate startingDay, LocalDate lastDay, Master master){
+    public TreeMap<LocalDate, List<Task>> getSchedule(@Nullable LocalDate startingDay, @Nullable LocalDate lastDay, Master master){
         List<Task> tasks;
         if (master==null)
             tasks=getTasksByDateBetween(startingDay, lastDay);
@@ -59,7 +60,7 @@ public class TaskService {
         return result;
     }
 
-    public TreeMap<LocalDate, List<Task>> getSchedule(LocalDate startingDay, LocalDate lastDay){
+    public TreeMap<LocalDate, List<Task>> getSchedule(@Nullable LocalDate startingDay, @Nullable LocalDate lastDay){
         return getSchedule(startingDay, lastDay, null);
     }
 

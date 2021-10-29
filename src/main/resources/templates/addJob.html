@@ -10,12 +10,16 @@
 
   <div class="starter-template">
     <h2>Новая укладка</h2>
-    <form th:action="@{/addJob}" method="post" th:object="${job}">
+
       <label th:text="${task.date}"></label><br>
       <label th:text="${task.orderNum}"></label><br>
       <label th:text="${task.adress}"></label><br>
       <label th:text="${task.phone}"></label><br>
       <label th:text="${task.master}"></label><br>
+    <th:block th:each="job1 : ${task.jobs}">
+      <label th:text="${job1}"></label><br>
+    </th:block>
+    <form th:action="@{/addJob}" method="post" th:object="${job}">
       <select id="jobType" required th:field="*{jobType}"><br>
         <option  value="" selected="selected">Выберите вид работы</option>
         <option th:each="jobType : ${jobTypes}"
@@ -26,6 +30,9 @@
       <label>Количество: <input id="count" required type="text" th:field="*{quantity}"/></label><br>
       <label hidden><input id="taskId" th:type="number" th:name="taskId" th:value="${task.id}"/></label><br>
       <input type="submit" value="Добавить работу">
+    </form>
+    <form th:action="@{/main}"}>
+    <input type="submit" value="Завершить">
     </form>
   </div>
 
