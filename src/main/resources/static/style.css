@@ -18,6 +18,11 @@
 .row {
     margin-bottom: 15px;
 }
+
+.task{
+    display: inline-block;
+    vertical-align: top;
+}
 .header{
     width: 100%;
     border-bottom: 1px solid #000000;

@@ -46,32 +46,29 @@
                             <div th:switch="${task.getValue()}">
                                 <h2 th:case="null">Свободно!</h2>
                                 <div th:case="*">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>Мастер</th>
-                                        <th>Номер продажи</th>
-                                        <th>Адрес</th>
-                                        <th>Телефон</th>
-                                        <th>Количество</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
+                                    <div class="task">
+                                        <label>Мастер<br>
+                                            Номер продажи<br>
+                                            Адрес<br>
+                                            Телефон<br>
+                                            Количество
+                                        </label>
+                                    </div>
+
                                     <th:block th:each="curTask : ${task.getValue()}">
-                                        <tr>
-                                            <td th:text="${curTask.master}"></td>
-                                            <td th:text="${curTask.orderNum}"></td>
-                                            <td th:text="${curTask.adress}"></td>
-                                            <td th:text="${curTask.phone}"></td>
-                                        <td>
+                                        <div class="task">
+                                            <label th:text="${curTask.master}"></label><br>
+                                            <label th:text="${curTask.orderNum}"></label><br>
+                                            <label th:text="${curTask.adress}"></label><br>
+                                            <label th:text="${curTask.phone}"></label><br>
+                                        <label>
                                             <th:block th:each="job : ${curTask.jobs}">
-                                                <span th:text="${job}"></span>
+                                                <span th:text="${job}"></span><br>
                                             </th:block>
-                                        </td>
-                                        </tr>
+                                        </label>
+                                        </div>
                                     </th:block>
-                                    </tbody>
-                                </table>
+
                                 </div>
                             </div>
                         </div>
