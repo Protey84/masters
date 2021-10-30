@@ -6,9 +6,9 @@ import java.time.LocalDate;
 
 public class FilterTask {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate startDay;
+    private LocalDate startDay=LocalDate.now();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate finishDay;
+    private LocalDate finishDay=LocalDate.now().plusDays(14);
     private Master master;
 
     public FilterTask() {

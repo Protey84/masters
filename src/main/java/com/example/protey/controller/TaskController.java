@@ -32,10 +32,10 @@ public class TaskController {
 
     @GetMapping("/main")
     public String main(Model model){
-        FilterTask filterTask=new FilterTask(LocalDate.now(), LocalDate.now().plusDays(7));
-        model.addAttribute("filter", new FilterTask());
+        FilterTask filter=new FilterTask();
+        model.addAttribute("filter", filter);
         model.addAttribute("masters", repo.findAll());
-        model.addAttribute("schedule", service.getSchedule(filterTask.getStartDay(), filterTask.getFinishDay()));
+        model.addAttribute("schedule", service.getSchedule(filter.getStartDay(), filter.getFinishDay()));
         return "main";
     }
     @PostMapping("/main")
