@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="java">
+<head>
+
+  <title>Укладка</title>
+  <link rel="stylesheet" type="text/css" th:href="style.css"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+  <label th:text="${task.date}"></label><br>
+  <label th:text="${task.orderNum}"></label><br>
+  <label th:text="${task.master}"></label><br>
+  <label th:text="${task.adress}"></label><br>
+  <label th:text="${task.phone}"></label><br>
+  <th:block th:each="job : ${task.jobs}">
+    <label th:text="${job}"></label><br>
+  </th:block>
+  <form th:action="@{/delete/{id}(id=${task.getId()})}">
+    <input type="submit" value="Удалить">
+  </form>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

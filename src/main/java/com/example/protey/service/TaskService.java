@@ -31,8 +31,8 @@ public class TaskService {
         return repository.findById(taskId).get();
     }
 
-    public boolean isExists(Task task){
-        return repository.existsById(task.getId());
+    public boolean isIdExists(Integer id){
+        return repository.existsById(id);
     }
 
     public Task save(Task task){
@@ -41,6 +41,10 @@ public class TaskService {
 
     public void delete(Task task){
         repository.delete(task);
+        return;
+    }
+    public void deleteById(int id){
+        repository.deleteById(id);
         return;
     }
 

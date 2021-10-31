@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 @Controller
 public class TaskController {
@@ -38,6 +39,25 @@ public class TaskController {
         model.addAttribute("schedule", service.getSchedule(filter.getStartDay(), filter.getFinishDay()));
         return "main";
     }
+
+    @GetMapping("delete/{id}")
+    public String deleteTask(@PathVariable("id") int id, Model model){
+        if (service.isIdExists(id))
+            service.deleteById(id);
+        return "redirect:/main";
+    }
+    @GetMapping("edit/{id}")
+    public String showUpdateForm(@PathVariable("id") int id, Model model){
+        Task task=service.getTaskById(id);
+        model.addAttribute("task", task);
+        return "task";
+    }
+
+    @PostMapping("save")
+    public String editTask(@ModelAttribute("task") Task task, Model model){
+        service.save(task);
+        return "main";
+    }
     @PostMapping("/main")
     public String filteredMain(@ModelAttribute("filter") FilterTask filter, Model model){
         model.addAttribute("filter", filter);
@@ -47,8 +67,10 @@ public class TaskController {
     }
     @GetMapping("/addTask/{date}")
     public String addTask(@PathVariable String date, Model model){
-        model.addAttribute("date", date);
         Task task=new Task();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate dt = LocalDate.parse(date, dtf);
+        task.setDate(dt);
         model.addAttribute("task", task);
         model.addAttribute("masters", repo.findAll());
         return "addTask";

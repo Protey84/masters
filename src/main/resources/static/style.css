@@ -4,7 +4,7 @@
     float: left; /* Обтекание слоев */
 }
 .col1{
-    width: 100px; /* Ширина колонок */
+    width: min-content; /* Ширина колонок */
     float: left;
     padding: 0 6px; /* Поля по вертикали и горизонтали */
     float: left; /* Обтекание слоев */

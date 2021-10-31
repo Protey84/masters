@@ -40,7 +40,7 @@
             <div class="body">
                 <th:block th:each="task : ${schedule}">
                     <div class="row">
-                        <div class="col1"><label th:text="${#temporals.dayOfWeekName(task.getKey())}"/><br><label th:text="${#temporals.format(task.getKey(), 'dd.MM.yyyy')}"/> </div>
+                        <div class="col1"><label th:text="${#temporals.dayOfWeekNameShort(task.getKey())}"></label><br><label th:text="${#temporals.format(task.getKey(), 'dd.MM')}"></label> </div>
                         <div class="col2">
                             <a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку<br/></a>
                             <div th:switch="${task.getValue()}">
@@ -58,7 +58,7 @@
                                     <th:block th:each="curTask : ${task.getValue()}">
                                         <div class="task">
                                             <label th:text="${curTask.master}"></label><br>
-                                            <label th:text="${curTask.orderNum}"></label><br>
+                                            <label><a th:href="@{edit/{id}(id=${curTask.getId()})}"><span th:text="${curTask.orderNum}"></span></a> </label><br>
                                             <label th:text="${curTask.adress}"></label><br>
                                             <label th:text="${curTask.phone}"></label><br>
                                         <label>

@@ -11,7 +11,7 @@
   <div class="starter-template">
     <h2>Новая укладка</h2>
     <form th:action="@{/addTask}" method="post" th:object="${task}">
-      <label>Дата укладки: <input id="date" th:attr="value = ${date}" required type="date" th:field="*{date}"/></label><br>
+      <label>Дата укладки: <input id="date" required type="date" th:field="*{date}"/></label><br>
       <label>№ ведомости: <input id="order" required type="text" th:field="*{orderNum}"/></label><br>
       <label>Адрес: <input id="adress" required type="text" th:field="*{adress}"/></label><br>
       <label>Телефон: <input id="phone" required type="tel" th:field="*{phone}"/></label><br>
