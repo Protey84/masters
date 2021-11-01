@@ -21,11 +21,6 @@ public class TaskController {
         this.repo = repo;
     }
 
-    @GetMapping("/tasks")
-    public String orders(Model model) {
-        model.addAttribute("tasks", service.getAll());
-        return "tasks";
-    }
     @GetMapping("/")
     public String main2(){
         return "redirect:/main";
@@ -50,13 +45,14 @@ public class TaskController {
     public String showUpdateForm(@PathVariable("id") int id, Model model){
         Task task=service.getTaskById(id);
         model.addAttribute("task", task);
+        model.addAttribute("masters", repo.findAll());
         return "task";
     }
 
-    @PostMapping("save")
+    @PostMapping("/save")
     public String editTask(@ModelAttribute("task") Task task, Model model){
         service.save(task);
-        return "main";
+        return "redirect:/main";
     }
     @PostMapping("/main")
     public String filteredMain(@ModelAttribute("filter") FilterTask filter, Model model){

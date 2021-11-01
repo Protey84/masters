@@ -60,7 +60,7 @@
                                             <label th:text="${curTask.master}"></label><br>
                                             <label><a th:href="@{edit/{id}(id=${curTask.getId()})}"><span th:text="${curTask.orderNum}"></span></a> </label><br>
                                             <label th:text="${curTask.adress}"></label><br>
-                                            <label th:text="${curTask.phone}"></label><br>
+                                            <a th:href="'tel:'+${curTask.getPhone()}"><label th:text="${curTask.phone}"></label></a><br>
                                         <label>
                                             <th:block th:each="job : ${curTask.jobs}">
                                                 <span th:text="${job}"></span><br>

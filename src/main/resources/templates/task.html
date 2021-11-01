@@ -8,17 +8,27 @@
 <body>
 <div th:replace="fragments/header :: header"></div>
 <div class="container">
-  <label th:text="${task.date}"></label><br>
-  <label th:text="${task.orderNum}"></label><br>
-  <label th:text="${task.master}"></label><br>
-  <label th:text="${task.adress}"></label><br>
-  <label th:text="${task.phone}"></label><br>
+  <form th:action="@{/save}" method="post" th:object="${task}">
+    <label for="date">Дата укладки: <input id="date" required type="date" th:field="*{date}"/></label><br>
+    <label>№ ведомости: <input id="order" required type="text" th:field="*{orderNum}"/></label><br>
+    <label>Адрес: <input id="adress" required type="text" th:field="*{adress}"/></label><br>
+    <label>Телефон: <input id="phone" required type="tel" th:field="*{phone}"/></label><br>
+    <label for="master">Мастер</label>
+    <select id="master" required th:field="*{master}"><br>
+      <option  value="" selected="selected">Выберите мастера</option>
+      <option th:each="master : ${masters}"
+              th:value="${master.id}"
+              th:text="${master.name}">
+      </option>
+    </select><br>
   <th:block th:each="job : ${task.jobs}">
     <label th:text="${job}"></label><br>
   </th:block>
-  <form th:action="@{/delete/{id}(id=${task.getId()})}">
-    <input type="submit" value="Удалить">
+    <input th:field="*{jobs}" hidden>
+    <input th:field="*{id}" hidden>
+    <input type="submit" value="Изменить">
   </form>
+  <a th:href="@{/delete/{id}(id=${task.getId()})}">Удалить укладку</a>
 </div>
 <!-- /.container -->
 
