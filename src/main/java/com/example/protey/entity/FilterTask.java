@@ -8,7 +8,7 @@ public class FilterTask {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDay=LocalDate.now();
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate finishDay=LocalDate.now().plusDays(14);
+    private LocalDate finishDay=LocalDate.now().plusDays(10);
     private Master master;
 
     public FilterTask() {

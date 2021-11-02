@@ -3,7 +3,7 @@
 <head>
 
     <title>Главная</title>
-    <link rel="stylesheet" type="text/css" th:href="style.css"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -46,26 +46,20 @@
                             <div th:switch="${task.getValue()}">
                                 <h2 th:case="null">Свободно!</h2>
                                 <div th:case="*">
-                                    <div class="task">
-                                        <label>Мастер<br>
-                                            Номер продажи<br>
-                                            Адрес<br>
-                                            Телефон<br>
-                                            Количество
-                                        </label>
-                                    </div>
-
                                     <th:block th:each="curTask : ${task.getValue()}">
                                         <div class="task">
-                                            <label th:text="${curTask.master}"></label><br>
-                                            <label><a th:href="@{edit/{id}(id=${curTask.getId()})}"><span th:text="${curTask.orderNum}"></span></a> </label><br>
-                                            <label th:text="${curTask.adress}"></label><br>
-                                            <a th:href="'tel:'+${curTask.getPhone()}"><label th:text="${curTask.phone}"></label></a><br>
-                                        <label>
+                                            Мастер:<br>
+                                            <strong  th:text="${curTask.master}"></strong><br>
+                                            Номер продажи:<br>
+                                            <a th:href="@{edit/{id}(id=${curTask.getId()})}"><strong th:text="${curTask.orderNum}"></strong></a><br>
+                                            Адрес:<br>
+                                            <strong th:text="${curTask.adress}"></strong><br>
+                                            Телефон:<br>
+                                            <a th:href="'tel:'+${curTask.getPhone()}"><strong th:text="${curTask.phone}"></strong></a><br>
+                                            Перечень работ:<br>
                                             <th:block th:each="job : ${curTask.jobs}">
-                                                <span th:text="${job}"></span><br>
+                                                <strong th:text="${job}"></strong><br>
                                             </th:block>
-                                        </label>
                                         </div>
                                     </th:block>
 
