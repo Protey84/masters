@@ -27,10 +27,11 @@
                 th:text="${jobType.jobName}">
         </option>
       </select>
-      <label>Количество: <input id="count" required type="text" th:field="*{quantity}"/></label><br>
+      <label>Количество: <input id="count" required type="text" pattern="\d+" placeholder="целое число" th:field="*{quantity}"/></label><br>
       <label hidden><input id="taskId" th:type="number" th:name="taskId" th:value="${task.id}"/></label><br>
       <input type="submit" value="Добавить работу">
     </form>
+    <br>
     <form th:action="@{/main}"}>
     <input type="submit" value="Завершить">
     </form>

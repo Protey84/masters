@@ -35,6 +35,16 @@ public class TaskController {
         return "main";
     }
 
+    @GetMapping("/main/{idMaster}")
+    public String mainMaster(@PathVariable("idMaster") int idMaster, Model model){
+        FilterTask filter=new FilterTask();
+        filter.setMaster(repo.findById(idMaster).get());
+        model.addAttribute("filter", filter);
+        model.addAttribute("masters", repo.findAll());
+        model.addAttribute("schedule", service.getSchedule(filter.getStartDay(), filter.getFinishDay(), filter.getMaster()));
+        return "main";
+    }
+
     @GetMapping("delete/{id}")
     public String deleteTask(@PathVariable("id") int id, Model model){
         if (service.isIdExists(id))

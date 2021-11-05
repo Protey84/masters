@@ -10,7 +10,7 @@
 <div class="container">
   <form th:action="@{/save}" method="post" th:object="${task}">
     <label for="date">Дата укладки: <input id="date" required type="date" th:field="*{date}"/></label><br>
-    <label>№ ведомости: <input id="order" required type="text" th:field="*{orderNum}"/></label><br>
+    <label>№ ведомости: <input id="order" required type="number" th:field="*{orderNum}"/></label><br>
     <label>Адрес: <input id="adress" required type="text" th:field="*{adress}"/></label><br>
     <label>Телефон: <input id="phone" required type="tel" th:field="*{phone}"/></label><br>
     <label for="master">Мастер</label>
@@ -27,7 +27,7 @@
     <input th:field="*{jobs}" hidden>
     <input th:field="*{id}" hidden>
     <input type="submit" value="Изменить">
-  </form>
+  </form><br><br>
   <a th:href="@{/delete/{id}(id=${task.getId()})}">Удалить укладку</a>
 </div>
 <!-- /.container -->
