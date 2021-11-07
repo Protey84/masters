@@ -21,17 +21,12 @@ public class TaskController {
         this.repo = repo;
     }
 
-    @GetMapping("/")
-    public String main2(){
-        return "redirect:/main";
-    }
-
-    @GetMapping("/main")
+    @GetMapping(value = {"/main", "/", "index"})
     public String main(Model model){
         FilterTask filter=new FilterTask();
         model.addAttribute("filter", filter);
         model.addAttribute("masters", repo.findAll());
-        model.addAttribute("schedule", service.getSchedule(filter.getStartDay(), filter.getFinishDay()));
+        model.addAttribute("schedule", service.getSchedule(filter.getStartDay(), filter.getFinishDay(), filter.getMaster()));
         return "main";
     }
 
@@ -49,7 +44,7 @@ public class TaskController {
     public String deleteTask(@PathVariable("id") int id, Model model){
         if (service.isIdExists(id))
             service.deleteById(id);
-        return "redirect:/main";
+        return "redirect: /";
     }
     @GetMapping("edit/{id}")
     public String showUpdateForm(@PathVariable("id") int id, Model model){
@@ -62,7 +57,7 @@ public class TaskController {
     @PostMapping("/save")
     public String editTask(@ModelAttribute("task") Task task, Model model){
         service.save(task);
-        return "redirect:/main";
+        return "redirect:/";
     }
     @PostMapping("/main")
     public String filteredMain(@ModelAttribute("filter") FilterTask filter, Model model){

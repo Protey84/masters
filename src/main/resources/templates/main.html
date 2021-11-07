@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="java">
 <head>
-
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
     <title>Главная</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
@@ -12,42 +12,40 @@
     <div class="starter-template">
         <form th:action="@{/main}" th:object="${filter}" method="post">
         <div class="filter">
-            <div class="date">
                 <label>
-                    <input th:type="date" th:field="*{startDay}">
+                    <input th:type="date" name="start" th:field="*{startDay}">
                 </label> - <label>
-                <input th:type="date" th:field="*{finishDay}">
+                <input th:type="date" name="finish" th:field="*{finishDay}">
             </label>
-            </div>
-            <div class="masterFilter">
                 <label>
-                    <select th:field="*{master}">
+                    <select name="mast" th:field="*{master}">
                         <option value=""> Выберите мастера </option>
                         <option th:each="master1 : ${masters}"
                                 th:value="${master1.id}"
                                 th:utext="${master1.name}"></option>
                     </select>
                 </label>
-            </div>
             <input type="submit" value="Применить">
         </div>
         </form>
+        <hr>
         <div class="mainContainer">
             <div class="row">
-                <div class="col1">Дата</div>
-                <div class="col2">Работа<br/></div>
+                <div class="col1"><h4>Дата</h4></div>
+                <div class="col2"><h4>Работа</h4><br/></div>
             </div>
             <div class="body">
                 <th:block th:each="task : ${schedule}">
+                    <hr>
                     <div class="row">
                         <div class="col1"><label th:text="${#temporals.dayOfWeekNameShort(task.getKey())}"></label><br><label th:text="${#temporals.format(task.getKey(), 'dd.MM')}"></label> </div>
                         <div class="col2">
-                            <a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку<br/></a>
+                            <h3><a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку</a></h3><br>
                             <div th:switch="${task.getValue()}">
                                 <h2 th:case="null">Свободно!</h2>
                                 <div th:case="*">
                                     <th:block th:each="curTask : ${task.getValue()}">
-                                        <div class="task">
+                                        <span class="task">
                                             Мастер:<br>
                                             <strong  th:text="${curTask.master}"></strong><br>
                                             Номер продажи:<br>
@@ -60,7 +58,7 @@
                                             <th:block th:each="job : ${curTask.jobs}">
                                                 <strong th:text="${job}"></strong><br>
                                             </th:block>
-                                        </div>
+                                        </span>
                                     </th:block>
 
                                 </div>
