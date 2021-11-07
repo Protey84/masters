@@ -13,6 +13,11 @@
     display: table;
     clear: both;
 }
+
+.task{
+    background-color: aqua;
+    padding: 5px;
+}
 .row {
     margin-bottom: 15px;
 }
