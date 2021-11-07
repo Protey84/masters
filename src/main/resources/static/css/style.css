@@ -17,6 +17,7 @@
 .task{
     background-color: aqua;
     padding: 5px;
+    margin: 5px;
 }
 .row {
     margin-bottom: 15px;
