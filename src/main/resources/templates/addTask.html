@@ -2,7 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org"  lang="">
 <head>
   <title>Добавить укладку</title>
-
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 
@@ -11,12 +12,12 @@
   <div class="starter-template">
     <h2>Новая укладка</h2>
     <form th:action="@{/addTask}" method="post" th:object="${task}">
-      <label>Дата укладки: <input id="date" th:value="${date}" required type="date" th:field="*{date}"/></label><br>
-      <label>№ ведомости: <input id="order" required type="text" th:field="*{orderNum}"/></label><br>
+      <label>Дата укладки: <input id="date" required type="date" th:field="*{date}"/></label><br>
+      <label>№ ведомости: <input id="order" required type="number" th:field="*{orderNum}"/></label><br>
       <label>Адрес: <input id="adress" required type="text" th:field="*{adress}"/></label><br>
       <label>Телефон: <input id="phone" required type="tel" th:field="*{phone}"/></label><br>
       <label for="master">Мастер</label>
-      <select id="master" required th:field="*{master}"><br>
+      <select id="master" required th:field="*{master}">
         <option  value="" selected="selected">Выберите мастера</option>
         <option th:each="master : ${masters}"
                 th:value="${master.id}"

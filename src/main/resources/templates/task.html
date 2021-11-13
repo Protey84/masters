@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru">
+<head>
+  <meta name="viewport" content="width=device-width, user-scalable=yes">
+  <title>Укладка</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div th:replace="fragments/header :: header"></div>
+<div class="container">
+  <form th:action="@{/save}" method="post" th:object="${task}">
+    <label for="date">Дата укладки: <input id="date" required type="date" th:field="*{date}"/></label><br>
+    <label>№ ведомости: <input id="order" required type="number" th:field="*{orderNum}"/></label><br>
+    <label>Адрес: <input id="address" required type="text" th:field="*{adress}"/></label><br>
+    <label>Телефон: <input id="phone" required type="tel" th:field="*{phone}"/></label><br>
+    <label for="master">Мастер</label>
+    <select id="master" required th:field="*{master}">
+      <option  value="" selected="selected">Выберите мастера</option>
+      <option th:each="master : ${masters}"
+              th:value="${master.id}"
+              th:text="${master.name}">
+      </option>
+    </select><br>
+  <th:block th:each="job : ${task.jobs}">
+    <label th:text="${job}"></label><br>
+  </th:block>
+    <label>
+      <input th:field="*{jobs}" hidden>
+    </label>
+    <label>
+      <input th:field="*{id}" hidden>
+    </label>
+    <input type="submit" value="Изменить">
+  </form><br><br>
+  <a th:href="@{/delete/{id}(id=${task.getId()})}">Удалить укладку</a>
+</div>
+<!-- /.container -->
+
+<div th:replace="fragments/footer :: footer"></div>
+
+</body>
+</html>

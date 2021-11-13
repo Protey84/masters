@@ -1,11 +1,9 @@
 .col2{
-    float: right; /* Ширина колонок */
     padding: 0 6px; /* Поля по вертикали и горизонтали */
     float: left; /* Обтекание слоев */
 }
 .col1{
-    width: 100px; /* Ширина колонок */
-    float: left;
+    width: min-content; /* Ширина колонок */
     padding: 0 6px; /* Поля по вертикали и горизонтали */
     float: left; /* Обтекание слоев */
     border-right: 1px solid #000; /* Параметры линии справа от текста */
@@ -15,8 +13,19 @@
     display: table;
     clear: both;
 }
+
+.task{
+    padding: 5px;
+    margin: 5px;
+    border: 2px black solid;
+}
 .row {
     margin-bottom: 15px;
+}
+
+.task{
+    display: inline-block;
+    vertical-align: top;
 }
 .header{
     width: 100%;

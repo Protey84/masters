@@ -58,6 +58,6 @@ public class Job {
 
     @Override
     public String toString() {
-        return jobType +" "+ quantity;
+        return quantity +" "+ jobType;
     }
 }

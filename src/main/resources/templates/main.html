@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org" lang="java">
 <head>
-
-    <title>Главная</title>
-    <link rel="stylesheet" type="text/css" th:href="style.css"/>
+    <meta name="viewport" content="width=device-width, user-scalable=yes">
+    <title>Расписние укладок</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
 <body>
 <div th:replace="fragments/header :: header"></div>
@@ -12,66 +12,55 @@
     <div class="starter-template">
         <form th:action="@{/main}" th:object="${filter}" method="post">
         <div class="filter">
-            <div class="date">
                 <label>
-                    <input th:type="date" th:value="*{startDay}" th:field="*{startDay}">
+                    <input th:type="date" name="start" th:field="*{startDay}">
                 </label> - <label>
-                <input th:type="date" th:value="*{finishDay}" th:field="*{finishDay}">
+                <input th:type="date" name="finish" th:field="*{finishDay}">
             </label>
-            </div>
-            <div class="masterFilter">
                 <label>
-                    <select th:field="*{master}">
+                    <select name="mast" th:field="*{master}">
                         <option value=""> Выберите мастера </option>
                         <option th:each="master1 : ${masters}"
                                 th:value="${master1.id}"
                                 th:utext="${master1.name}"></option>
                     </select>
                 </label>
-            </div>
             <input type="submit" value="Применить">
         </div>
         </form>
+        <hr>
         <div class="mainContainer">
             <div class="row">
-                <div class="col1">Дата</div>
-                <div class="col2">Работа<br/></div>
+                <div class="col1"><h4>Дата</h4></div>
+                <div class="col2"><h4>Работа</h4><br/></div>
             </div>
             <div class="body">
                 <th:block th:each="task : ${schedule}">
+                    <hr>
                     <div class="row">
-                        <div class="col1"><label th:text="${#temporals.dayOfWeekName(task.getKey())}"/><br><label th:text="${task.getKey()}"/> </div>
+                        <div class="col1"><label th:text="${#temporals.dayOfWeekNameShort(task.getKey())}"></label><br><label th:text="${#temporals.format(task.getKey(), 'dd.MM')}"></label> </div>
                         <div class="col2">
-                            <a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку<br/></a>
+                            <h3><a th:href="@{addTask/{date}(date=${task.getKey()})}">Добавить укладку</a></h3><br>
                             <div th:switch="${task.getValue()}">
                                 <h2 th:case="null">Свободно!</h2>
                                 <div th:case="*">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th>Номер продажи</th>
-                                        <th>Адрес</th>
-                                        <th>Телефон</th>
-                                        <th>Мастер</th>
-                                        <th>Количество</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
                                     <th:block th:each="curTask : ${task.getValue()}">
-                                        <tr>
-                                        <td th:text="${curTask.orderNum}"></td>
-                                        <td th:text="${curTask.adress}"></td>
-                                        <td th:text="${curTask.phone}"></td>
-                                        <td th:text="${curTask.master}"></td>
-                                        <td>
+                                        <span class="task">
+                                            Мастер:<br>
+                                            <strong  th:text="${curTask.master}"></strong><br>
+                                            Номер продажи:<br>
+                                            <a th:href="@{edit/{id}(id=${curTask.getId()})}"><strong th:text="${curTask.orderNum}"></strong></a><br>
+                                            Адрес:<br>
+                                            <strong th:text="${curTask.adress}"></strong><br>
+                                            Телефон:<br>
+                                            <a th:href="'tel:'+${curTask.getPhone()}"><strong th:text="${curTask.phone}"></strong></a><br>
+                                            Перечень работ:<br>
                                             <th:block th:each="job : ${curTask.jobs}">
-                                                <span th:text="${job}"></span>
+                                                <strong th:text="${job}"></strong><br>
                                             </th:block>
-                                        </td>
-                                        </tr>
+                                        </span>
                                     </th:block>
-                                    </tbody>
-                                </table>
+
                                 </div>
                             </div>
                         </div>
